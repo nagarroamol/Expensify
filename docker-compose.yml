@@ -1,0 +1,51 @@
+services:
+  api:
+    build:
+      context: ./API/expensifyAPI
+      dockerfile: Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=ExpenseManagerDb;User Id=sa;Password=Nagarro@123;TrustServerCertificate=True;
+      - Redis__ConnectionString=redis:6379
+    ports:
+      - "5000:8080"
+    networks:
+      - app-network
+    depends_on:
+      - db
+      - redis
+
+  react-app:
+    build:
+      context: ./Client
+      dockerfile: Dockerfile
+      args:
+        BUILD_ENV: ${BUILD_ENV:-Development}
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+    depends_on:
+      - api
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "Nagarro@123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
