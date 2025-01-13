@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import ExpenseManager from './ExpenseManager';
+import ExpenseManager from './components/ExpenseManager';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

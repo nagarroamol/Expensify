@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addCategory } from './Services/categoryService';
+import { addCategory } from '../Services/categoryService';
  // Import the service
 
 const Categories = ({ categories, loading, error }) => {

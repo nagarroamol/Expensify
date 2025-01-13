@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Categories from './Categories';
 import Expenses from './Expenses';
 import Reports from './Reports';
-import { getCategories } from './Services/categoryService';
+import { getCategories } from '../Services/categoryService';
 
 const ExpenseManager = () => {
   const [categories, setCategories] = useState([]);

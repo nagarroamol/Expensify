@@ -1,4 +1,4 @@
-import axiosInstance from '../axiosInstance';  // Import axiosInstance
+import axiosInstance from './axiosInstance';  // Import axiosInstance
 
 // Function to fetch categories from the API
 export const getCategories = async () => {

@@ -1,0 +1,12 @@
+
+  .delete-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+  
+  .text-end {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
