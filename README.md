@@ -11,7 +11,6 @@ This repository contains an **Expense Manager** application built with a microse
 - **Redis Cache** for fast retrieval of category information.
 - **Docker Compose** configuration for easy setup and deployment.
 - Manual build and run instructions for development purposes.
-- 
 ---
 
 ## Architecture Overview
