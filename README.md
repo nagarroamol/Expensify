@@ -1,80 +1,108 @@
-<<<<<<< HEAD
 # Expensify
 Expense Manager App
 =======
-<<<<<<< HEAD
-# Expensify
-Expense Manager App
-=======
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains an **Expense Manager** application built with a microservices architecture using **ASP.NET Core Web API**, **SQL Server**, and **Redis Cache**. The application provides users with features to manage expenses and categorize them efficiently. It includes a **web app** as the frontend and leverages **Docker Compose** for container orchestration.
 
-## Available Scripts
+## Features
+- **Web Application** built with modern UI for managing expenses.
+- **ASP.NET Core Web API** backend for handling business logic.
+- **SQL Server** for persistent storage of expenses and user data.
+- **Redis Cache** for fast retrieval of category information.
+- **Docker Compose** configuration for easy setup and deployment.
+- Manual build and run instructions for development purposes.
+---
 
-In the project directory, you can run:
+## Architecture Overview
 
-### `npm start`
+### Components
+1. **Web Application**
+   - A frontend application that provides an intuitive user interface for managing expenses.
+   - Communicates with the backend through RESTful APIs.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **ASP.NET Core Web API**
+   - Provides endpoints for expense management operations such as adding, updating, deleting, and retrieving expenses.
+   - Implements caching mechanisms to improve performance.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **SQL Server**
+   - Stores expense data, user information, and other necessary details.
+   - Designed with efficient indexing and relationships for faster querying.
 
-### `npm test`
+4. **Redis Cache**
+   - Caches frequently accessed data like expense categories to reduce database load and improve performance.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
+Ensure you have the following installed on your local machine:
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [.NET 7.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+- [SQL Server Management Studio (SSMS)](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Setting Up the Environment
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### 1. Clone the Repository
+```bash
+git clone https://github.com/nagarroamol/Expensify.git
+cd expense-manager
+```
 
-### `npm run eject`
+#### 2. Using Docker Compose
+The project comes with a pre-configured `docker-compose.yml` file to set up the entire application stack.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+docker-compose up --build
+```
+This command will:
+- Build the web app and API images.
+- Set up the SQL Server and Redis containers.
+- Expose the necessary ports.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Once the services are up and running, access the web application at `http://localhost:5000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### 3. Manual Build and Run
+If you prefer to run the services manually without Docker, follow these steps:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Step 1: Set up SQL Server**
+- Ensure SQL Server is running on your machine.
+- Update the connection string in `appsettings.json` to match your local SQL Server instance.
 
-## Learn More
+**Step 2: Run the Web API**
+```bash
+cd ExpenseManager.Api
+dotnet build
+```
+Then run the API:
+```bash
+cd bin/Debug/net7.0
+./ExpenseManager.Api.exe
+```
+The API will be available at `http://localhost:5001`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Step 3: Run the Web App**
+```bash
+cd ExpenseManager.Web
+npm install
+npm start
+```
+Access the web application at `http://localhost:5000`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Technologies Used
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: ASP.NET Core Web API
+- **Database**: SQL Server
+- **Caching**: Redis Cache
+- **Containerization**: Docker, Docker Compose
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contributing
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-### Analyzing the Bundle Size
+## Contact
+For any questions or feedback, feel free to reach out:
+- **Email**: amolb52@gmail.com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> 34a32fa (initial commit)
->>>>>>> 6faa87d (initial commit)
