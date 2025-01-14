@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
-import { addCategory } from '../Services/categoryService';
- // Import the service
+ // Import the delete service
+import { FaTrash } from 'react-icons/fa'; // Import a trash icon
 
-const Categories = ({ categories, loading, error }) => {
+const Categories = ({ categories, loading, error, onAddCategory, onDeleteCategory }) => {
   const [customCategory, setCustomCategory] = useState('');
 
   const handleAddCategory = async () => {
-    if (customCategory && !categories.includes(customCategory)) {
-        try {
-           await addCategory(customCategory);
-        } catch (err) {
-          console.log('Failed to add category');
-        }
+    if (customCategory && !categories.some((cat) => cat.name === customCategory)) {
+      try {
+        await onAddCategory(customCategory);
+        setCustomCategory('');
+      } catch (err) {
+        console.log('Failed to add category');
       }
+    }
+  };
+
+  const handleDeleteCategory = async (id) => {
+    try {
+      await onDeleteCategory(id);
+    } catch (err) {
+      console.log('Failed to delete category');
+    }
   };
 
   if (loading) {
@@ -37,8 +46,15 @@ const Categories = ({ categories, loading, error }) => {
         <button className="btn btn-secondary mt-2" onClick={handleAddCategory}>Add Category</button>
       </div>
       <ul className="list-group">
-        {categories.map((cat) => (
-          <li key={cat.id} className="list-group-item">{cat.name}</li>
+        {(categories || []).map((cat) => (
+          <li key={cat.id} className="list-group-item d-flex justify-content-between align-items-center">
+            {cat.name}
+            <FaTrash 
+              className="text-danger" 
+              style={{ cursor: 'pointer' }} 
+              onClick={() => handleDeleteCategory(cat.id)} 
+            />
+          </li>
         ))}
       </ul>
     </div>

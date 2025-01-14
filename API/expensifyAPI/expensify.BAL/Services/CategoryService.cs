@@ -57,5 +57,7 @@ namespace expensify.BAL
         {
             return await _context.Categories.ToListAsync();
         }
+
+
     }
 }

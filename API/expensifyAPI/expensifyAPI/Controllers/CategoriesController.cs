@@ -2,6 +2,7 @@
 using expensify.BAL;
 using expensify.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace expensifyAPI.Controllers
 {
@@ -32,6 +33,21 @@ namespace expensifyAPI.Controllers
             await _context.SaveChangesAsync();
             await _categoryService.InvlidateCategoriesCacheAsync();
             return CreatedAtAction(nameof(GetCategories), new { id = category.Id }, category);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var categories = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            if (categories == null)
+            {
+                return NotFound();
+            }
+
+            _context.Categories.Remove(categories);
+            await _context.SaveChangesAsync();
+            await _categoryService.InvlidateCategoriesCacheAsync();
+            return NoContent();
         }
     }
 }

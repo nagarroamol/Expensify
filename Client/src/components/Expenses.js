@@ -23,10 +23,8 @@ const Expenses = ({ categories }) => {
 
   const handleAddExpense = async (newExpense) => {
     try {
-      const response = await axiosInstance.post('expenses', newExpense);
-      if (response.status === 200) {
-        fetchExpenses();
-      }
+      await axiosInstance.post('expenses', newExpense);
+      fetchExpenses();
     } catch (error) {
       if (error.response && error.response.data) {
         const validationErrors = error.response.data;
@@ -40,7 +38,7 @@ const Expenses = ({ categories }) => {
   const handleDeleteExpense = async (id) => {
     try {
       await axiosInstance.delete(`expenses/${id}`);
-      setExpenses(expenses.filter((expense) => expense.id !== id)); // Remove the deleted expense
+      fetchExpenses();
     } catch (error) {
       console.error('Error deleting expense:', error);
     }

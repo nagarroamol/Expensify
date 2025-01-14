@@ -20,3 +20,13 @@ export const addCategory = async (categoryName) => {
     throw error;  // Re-throw the error to be handled by the caller
   }
 };
+
+export const deleteCategory = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`categories/${id}`);
+    return response.data; 
+  } catch (error) {
+    console.error('Error deleting category:', error);
+    throw error;
+  }
+};

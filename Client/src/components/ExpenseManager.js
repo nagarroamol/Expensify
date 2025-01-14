@@ -3,29 +3,47 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Categories from './Categories';
 import Expenses from './Expenses';
 import Reports from './Reports';
-import { getCategories } from '../Services/categoryService';
+import { getCategories, addCategory, deleteCategory } from '../Services/categoryService';
 
 const ExpenseManager = () => {
   const [categories, setCategories] = useState([]);
   const [reportType, setReportType] = useState('weekly');
-  const [loading, setLoading] = useState(true); // State to track loading
-  const [error, setError] = useState(null); // State to track errors
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const response = await getCategories();
+      setCategories(response);
+    } catch (err) {
+      setError('Failed to load categories');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    // Fetch categories when the component mounts
-    const fetchCategories = async () => {
-      try {
-        const data = await getCategories();  // Call the service function
-        setCategories(data);  // Set the categories in state
-      } catch (err) {
-        setError('Failed to load categories');  // Set error state
-      } finally {
-        setLoading(false);  // Stop loading once the request is complete
-      }
-    };
-
     fetchCategories();
-  }, []); // Empty dependency array means it runs only once on mount
+  }, []);
+
+  const addCateg = async (newCategory) => {
+    try {
+      await addCategory(newCategory);
+      fetchCategories();
+    } catch (err) {
+      console.log('Failed to add category');
+    }
+  };
+
+  const deleteCateg = async (id) => {
+    try {
+      await deleteCategory(id);
+      fetchCategories();
+    } catch (err) {
+      console.log('Failed to delete category');
+    }
+  };
 
   return (
     <div className="container mt-5">
@@ -43,7 +61,13 @@ const ExpenseManager = () => {
         </div>
 
         <div className="tab-pane fade" id="categories" role="tabpanel">
-          <Categories categories={categories} loading={loading} error={error} setCategories={setCategories} />
+        <Categories
+          categories={categories}
+          loading={loading}
+          error={error}
+          onAddCategory={addCateg}
+          onDeleteCategory={deleteCateg}
+        />
         </div>
 
         <div className="tab-pane fade" id="reports" role="tabpanel">

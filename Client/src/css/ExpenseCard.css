@@ -1,4 +1,8 @@
 
+.expense-card {
+  margin: 5px;
+
+}
   .delete-icon {
     position: absolute;
     top: 15px;

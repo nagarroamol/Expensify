@@ -43,8 +43,8 @@ const AddExpenseModal = ({ show, onClose, onAdd, categories }) => {
               value={selectedCategoryId}
               onChange={(e) => setSelectedCategoryId(e.target.value)}
             >
-              <option value="">Select a category</option>
-              {categories.map((cat) => (
+              <option value="" key={-1}>Select a category</option>
+              {(categories || []).map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
                 </option>
