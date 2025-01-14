@@ -98,6 +98,14 @@ Access the web application at `http://localhost:5000`.
 
 ---
 
+## Screenshots
+![image](https://github.com/user-attachments/assets/652ef864-ce8e-4caf-81c8-6b043dc47faf)
+![image](https://github.com/user-attachments/assets/83dbf53b-d858-4946-bcc8-2831fff61ba6)
+![image](https://github.com/user-attachments/assets/af4b98cc-7415-4c93-8176-d9a6f221e6e3)
+![image](https://github.com/user-attachments/assets/c3b6ff7b-f4c6-4397-b3f4-ae0865b7677b)
+
+
+
 ## Contributing
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
