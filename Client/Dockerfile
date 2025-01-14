@@ -1,4 +1,4 @@
-FROM node:20 AS build
+FROM node:20 AS deps
 
 ARG BUILD_ENV=development
 
@@ -7,6 +7,12 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 RUN npm install
+
+FROM node:20 AS build
+
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
 
 ENV NODE_OPTIONS=--openssl-legacy-provider
 
