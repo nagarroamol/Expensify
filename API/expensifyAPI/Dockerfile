@@ -27,4 +27,5 @@ RUN dotnet publish "./expensifyAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publi
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "expensifyAPI.dll"]
+
+ENTRYPOINT ["sh", "-c", "echo 'Waiting for 5 seconds...'; sleep 5; exec dotnet expensifyAPI.dll"]
