@@ -3,6 +3,8 @@ services:
     build:
       context: ./API/expensifyAPI
       dockerfile: Dockerfile
+      args:
+        BUILD_CONFIGURATION: ${BUILD_CONFIGURATION:-Release}
     environment:
       - ConnectionStrings__DefaultConnection=Server=db,1433;Database=ExpenseManagerDb;User Id=sa;Password=Nagarro@123;TrustServerCertificate=True;
       - Redis__ConnectionString=redis:6379
