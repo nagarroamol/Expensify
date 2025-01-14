@@ -46,7 +46,7 @@ Ensure you have the following installed on your local machine:
 #### 1. Clone the Repository
 ```bash
 git clone https://github.com/nagarroamol/Expensify.git
-cd expense-manager
+cd Expensify
 ```
 
 #### 2. Using Docker Compose
@@ -71,19 +71,19 @@ If you prefer to run the services manually without Docker, follow these steps:
 
 **Step 2: Run the Web API**
 ```bash
-cd ExpenseManager.Api
+cd API/Expensify.Api
 dotnet build
 ```
 Then run the API:
 ```bash
 cd bin/Debug/net7.0
-./ExpenseManager.Api.exe
+./Expensify.Api.exe
 ```
 The API will be available at `http://localhost:5001`.
 
 **Step 3: Run the Web App**
 ```bash
-cd ExpenseManager.Web
+cd Client
 npm install
 npm start
 ```
