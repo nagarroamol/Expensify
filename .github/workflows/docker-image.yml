@@ -24,29 +24,19 @@ jobs:
         username: ${{ vars.DOCKER_USERNAME }}
         # Password or personal access token used to log against the Docker registry
         password: ${{ secrets.DOCKER_TOKEN }}
-
-    - name: Set working directory to a docker api
-      run: |
-        echo "Current working directory"
-        pwd
-      working-directory: ./API/expensifyAPI
     
-    - name: Build the Docker image & Tag
+    - name: Build the Docker API image & Tag
       run: |
         ls
         docker build . --file Dockerfile --tag ${{ vars.DOCKER_USERNAME }}/expensifyapp-api:latest
         docker images
-
-    - name: Set working directory to a docker app
-      run: |
-        echo "Current working directory"
-        pwd
-      working-directory: ./Client
+      working-directory: ./API/expensifyAPI
     
-    - name: Build the Docker image & Tag
+    - name: Build the Docker APP image & Tag
       run: |
         docker build . --file Dockerfile --tag ${{ vars.DOCKER_USERNAME }}/expensifyapp-react-app:latest
         docker images
+      working-directory: ./Client
 
     - name: Push Docker image to Docker hub
       run: |
