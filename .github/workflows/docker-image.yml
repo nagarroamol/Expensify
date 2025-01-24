@@ -33,6 +33,7 @@ jobs:
     
     - name: Build the Docker image & Tag
       run: |
+        ls
         docker build . --file Dockerfile --tag ${{ vars.DOCKER_USERNAME }}/expensifyapp-api:latest
         docker images
 
