@@ -24,8 +24,8 @@ jobs:
     - name: Build the Docker image & Tag
       run: |
         docker compose build --no-cache
-        API_IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/expensifyapp-api:$(date +%Y%m%d%H%M%S)
-        APP_IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/expensifyapp-react-app:$(date +%Y%m%d%H%M%S)
+        API_IMAGE_NAME= ${{ secrets.DOCKER_USERNAME }}/expensifyapp-api:v$(date +%Y%m%d%H%M%S)
+        APP_IMAGE_NAME= ${{ secrets.DOCKER_USERNAME }}/expensifyapp-react-app:v$(date +%Y%m%d%H%M%S)
         docker tag expensifyapp-api:latest $API_IMAGE_NAME
         docker tag expensifyapp-react-app:latest $APP_IMAGE_NAME
 
