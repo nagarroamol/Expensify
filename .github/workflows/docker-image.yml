@@ -33,9 +33,7 @@ jobs:
     
     - name: Build the Docker image & Tag
       run: |
-        docker build -t expensifyapp-api:latest .
-        # docker tag expensifyapp-api:latest $API_IMAGE_NAME
-        # docker tag expensifyapp-react-app:latest $APP_IMAGE_NAME
+        docker build . --file Dockerfile --tag ${{ vars.DOCKER_USERNAME }}/expensifyapp-api:latest
         docker images
 
     - name: Set working directory to a docker app
@@ -46,13 +44,11 @@ jobs:
     
     - name: Build the Docker image & Tag
       run: |
-        docker build -t expensifyapp-react-app:latest .
-        # docker tag expensifyapp-api:latest $API_IMAGE_NAME
-        # docker tag expensifyapp-react-app:latest $APP_IMAGE_NAME
+        docker build . --file Dockerfile --tag ${{ vars.DOCKER_USERNAME }}/expensifyapp-react-app:latest
         docker images
 
     - name: Push Docker image to Docker hub
       run: |
-        docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-api
-        docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-react-app
+        docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-api:latest
+        docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-react-app:latest
 
