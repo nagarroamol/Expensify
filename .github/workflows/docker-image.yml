@@ -22,19 +22,17 @@ jobs:
       with:
         # Username used to log against the Docker registry
         username: ${{ vars.DOCKER_USERNAME }}
-      # Password or personal access token used to log against the Docker registry
+        # Password or personal access token used to log against the Docker registry
         password: ${{ secrets.DOCKER_TOKEN }}
           
     - name: Build the Docker image & Tag
       run: |
         docker compose build --no-cache
-        export API_IMAGE_NAME= ${{ vars.DOCKER_USERNAME }}/expensifyapp-api:$(date +%Y%m%d%H%M%S)
-        export APP_IMAGE_NAME= ${{ vars.DOCKER_USERNAME }}/expensifyapp-react-app:$(date +%Y%m%d%H%M%S)
-        docker tag expensifyapp-api:latest $API_IMAGE_NAME
-        docker tag expensifyapp-react-app:latest $APP_IMAGE_NAME
+        # docker tag expensifyapp-api:latest $API_IMAGE_NAME
+        # docker tag expensifyapp-react-app:latest $APP_IMAGE_NAME
 
     - name: Push Docker image to Docker hub
       run: |
-        docker push $API_IMAGE_NAME
-        docker push $APP_IMAGE_NAME
+        docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-api:latest
+        docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-react-app
 
