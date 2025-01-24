@@ -30,9 +30,10 @@ jobs:
         docker compose build --no-cache
         # docker tag expensifyapp-api:latest $API_IMAGE_NAME
         # docker tag expensifyapp-react-app:latest $APP_IMAGE_NAME
+        docker images
 
     - name: Push Docker image to Docker hub
       run: |
-        docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-api:latest
+        docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-api
         docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-react-app
 
