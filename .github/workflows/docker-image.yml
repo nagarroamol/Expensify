@@ -25,11 +25,11 @@ jobs:
         # Password or personal access token used to log against the Docker registry
         password: ${{ secrets.DOCKER_TOKEN }}
 
-    - name: Set working directory for a docker api
+    - name: Set working directory to a docker api
       run: |
         echo "Current working directory"
         pwd
-      working-directory: ./API
+      working-directory: ./API/expensifyAPI
     
     - name: Build the Docker image & Tag
       run: |
@@ -38,8 +38,21 @@ jobs:
         # docker tag expensifyapp-react-app:latest $APP_IMAGE_NAME
         docker images
 
+    - name: Set working directory to a docker app
+      run: |
+        echo "Current working directory"
+        pwd
+      working-directory: ./Client
+    
+    - name: Build the Docker image & Tag
+      run: |
+        docker build -t expensifyapp-react-app:latest .
+        # docker tag expensifyapp-api:latest $API_IMAGE_NAME
+        # docker tag expensifyapp-react-app:latest $APP_IMAGE_NAME
+        docker images
+
     - name: Push Docker image to Docker hub
       run: |
         docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-api
-        # docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-react-app
+        docker push ${{ vars.DOCKER_USERNAME }}/expensifyapp-react-app
 
