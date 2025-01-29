@@ -114,7 +114,8 @@ Access the web application at `http://localhost:5000`.
 ![image](https://github.com/user-attachments/assets/af4b98cc-7415-4c93-8176-d9a6f221e6e3)
 ![image](https://github.com/user-attachments/assets/c3b6ff7b-f4c6-4397-b3f4-ae0865b7677b)
 
-
+- CI Pipeline:
+![image](https://github.com/user-attachments/assets/816bec40-7081-4981-bbe9-ce8bda7530f7)
 
 ## Contributing
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
