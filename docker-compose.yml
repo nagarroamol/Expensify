@@ -17,7 +17,7 @@ services:
     environment:
       - REACT_APP_API_URL=http://localhost:5000
     ports:
-      - "3000:80"
+      - "3001:80"
     networks:
       - app-network
     depends_on:
@@ -30,6 +30,8 @@ services:
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
+    volumes:
+      - db_data:/var/opt/mssql
     networks:
       - app-network
 
@@ -40,6 +42,30 @@ services:
     networks:
       - app-network
 
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/prometheus/prometheus.yml
+    command:
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.listen-address=127.0.0.1:9090'
+    network_mode: "host"
+    depends_on:
+      - api
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      GF_SERVER_HTTP_ADDR: "127.0.0.1"
+    network_mode: "host"
+    depends_on:
+      - prometheus
+
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  db_data:

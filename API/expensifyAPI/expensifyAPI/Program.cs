@@ -1,6 +1,8 @@
 using ExpenseManagerApi.Data;
 using expensify.BAL;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "http://127.0.0.1:3000", "http://react-app:3000")
+        builder.WithOrigins("http://localhost:3001", "http://127.0.0.1:3001", "http://react-app:3001")
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
@@ -30,19 +32,33 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHttpLogging(logging =>
+{
+    logging.LoggingFields = HttpLoggingFields.All;
+});
+
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
 app.UseCors("AllowReactApp");
 app.UseRouting();
+app.UseHttpLogging();
+app.UseHttpMetrics();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapMetrics();
+});
 
 app.UseAuthorization();
 

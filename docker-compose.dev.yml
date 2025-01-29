@@ -1,6 +1,8 @@
 services:
   api:
-    image: nagarroamol/expensifyapp-api
+    build:
+      context: ./API/expensifyAPI
+      dockerfile: Dockerfile
     environment:
       - ConnectionStrings__DefaultConnection=Server=db,1433;Database=ExpenseManagerDb;User Id=sa;Password=Nagarro@123;TrustServerCertificate=True;
       - Redis__ConnectionString=redis:6379
@@ -13,11 +15,13 @@ services:
       - redis
 
   react-app:
-    image: nagarroamol/expensifyapp-react-app
+    build:
+      context: ./Client
+      dockerfile: Dockerfile
     environment:
       - REACT_APP_API_URL=http://localhost:5000
     ports:
-      - "3000:80"
+      - "3001:80"
     networks:
       - app-network
     depends_on:
@@ -30,6 +34,8 @@ services:
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
+    volumes:
+      - db_data:/var/opt/mssql
     networks:
       - app-network
 
@@ -40,6 +46,30 @@ services:
     networks:
       - app-network
 
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/prometheus/prometheus.yml
+    command:
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.listen-address=127.0.0.1:9090'
+    network_mode: "host"
+    depends_on:
+      - api
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      GF_SERVER_HTTP_ADDR: "127.0.0.1"
+    network_mode: "host"
+    depends_on:
+      - prometheus
+
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  db_data:
