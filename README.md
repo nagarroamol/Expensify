@@ -7,8 +7,11 @@ This repository contains an **Expense Manager** application built with a microse
 - **ASP.NET Core Web API** backend for handling business logic.
 - **SQL Server** for persistent storage of expenses and user data.
 - **Redis Cache** for fast retrieval of category information.
+- **Prometheus** for monitoring and alerting.
+- **Grafana** for visualizing metrics.
 - **Docker Compose** configuration for easy setup and deployment.
 - Manual build and run instructions for development purposes.
+
 ---
 
 ## Architecture Overview
@@ -29,17 +32,25 @@ This repository contains an **Expense Manager** application built with a microse
 4. **Redis Cache**
    - Caches frequently accessed data like expense categories to reduce database load and improve performance.
 
+5. **Prometheus**
+   - Collects metrics from the application and infrastructure.
+   - Provides alerting capabilities based on defined thresholds.
+
+6. **Grafana**
+   - Visualizes metrics collected by Prometheus.
+   - Offers customizable dashboards for monitoring application performance.
+
 ---
 
 ## Getting Started
 
 ### Prerequisites
 Ensure you have the following installed on your local machine:
-- [Docker](https://www.docker.com/get-started)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-- [.NET 7.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
-- [SQL Server Management Studio (SSMS)](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
-
+- Docker
+- Docker Compose
+- .NET 7.0 SDK
+- SQL Server Management Studio (SSMS)
+  
 ### Setting Up the Environment
 
 #### 1. Clone the Repository
