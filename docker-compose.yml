@@ -9,8 +9,10 @@ services:
     networks:
       - app-network
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
 
   react-app:
     image: nagarroamol/expensifyapp-react-app
@@ -34,6 +36,12 @@ services:
       - db_data:/var/opt/mssql
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P Nagarro@123 -Q 'SELECT 1' -C"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
 
   redis:
     image: redis:latest
