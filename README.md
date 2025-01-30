@@ -1,5 +1,6 @@
 # Expensify - Expense Manager App
 
+
 This repository contains an **Expense Manager** application built with a microservices architecture using **ASP.NET Core Web API**, **SQL Server**, and **Redis Cache**. The application provides users with features to manage expenses and categorize them efficiently. It includes a **web app** as the frontend and leverages **Docker Compose** for container orchestration.
 
 ## Features
